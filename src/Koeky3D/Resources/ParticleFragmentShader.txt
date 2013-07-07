@@ -1,0 +1,37 @@
+#version 140
+in vec2 out_TexCoord;
+in vec4 out_TextureAlpha;
+in float out_Alpha;
+
+uniform sampler2D particleTexture;
+uniform int textureCount;
+
+void main()
+{
+	// read particle texture color
+	vec4 totalTextureColor;
+	if(textureCount == 1)
+	{
+		totalTextureColor += texture2D(particleTexture, out_TexCoord * vec2(2.0f, 2.0f));
+	}
+	else if(textureCount == 2)
+	{
+		totalTextureColor += texture2D(particleTexture, out_TexCoord * vec2(1.0f, 2.0f)) * out_TextureAlpha.x;
+		totalTextureColor += texture2D(particleTexture, out_TexCoord * vec2(1.0f, 2.0f) + vec2(0.5f, 0.0f)) * out_TextureAlpha.y;
+	}
+	else if(textureCount == 3)
+	{
+		totalTextureColor += texture2D(particleTexture, out_TexCoord) * out_TextureAlpha.x;
+		totalTextureColor += texture2D(particleTexture, out_TexCoord + vec2(0.5f, 0.0f)) * out_TextureAlpha.y;
+		totalTextureColor += texture2D(particleTexture, out_TexCoord + vec2(0.0f, 0.5f)) * out_TextureAlpha.z;
+	}
+	else if(textureCount == 4)
+	{
+		totalTextureColor += texture2D(particleTexture, out_TexCoord) * out_TextureAlpha.x;
+		totalTextureColor += texture2D(particleTexture, out_TexCoord + vec2(0.5f, 0.0f)) * out_TextureAlpha.y;
+		totalTextureColor += texture2D(particleTexture, out_TexCoord + vec2(0.0f, 0.5f)) * out_TextureAlpha.z;
+		totalTextureColor += texture2D(particleTexture, out_TexCoord + vec2(0.5f, 0.5f)) * out_TextureAlpha.w;
+	}
+
+	gl_FragColor = totalTextureColor * out_Alpha;
+}

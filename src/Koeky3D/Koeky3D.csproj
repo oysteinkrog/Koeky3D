@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{01A950ED-F882-407A-90A8-A93D21B43289}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Koeky3D</RootNamespace>
+    <AssemblyName>GLFramework</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\Debug\GLFramework.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>..\Release\GLFramework.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK">
+      <HintPath>..\Libraries\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Animation\Animation.cs" />
+    <Compile Include="Animation\AnimationType.cs" />
+    <Compile Include="Animation\Bone.cs" />
+    <Compile Include="Animation\BoneKeyframes.cs" />
+    <Compile Include="Animation\KeyframePosition.cs" />
+    <Compile Include="Animation\KeyframeRotation.cs" />
+    <Compile Include="Animation\Skeleton.cs" />
+    <Compile Include="BufferHandling\BufferAttribute.cs" />
+    <Compile Include="BufferHandling\BufferElement.cs" />
+    <Compile Include="BufferHandling\FrameBuffer.cs" />
+    <Compile Include="BufferHandling\VertexBuffer.cs" />
+    <Compile Include="BufferHandling\IndexBuffer.cs" />
+    <Compile Include="BufferHandling\VertexArray.cs" />
+    <Compile Include="BufferHandling\VertexTextureNormal.cs" />
+    <Compile Include="GLManager.cs" />
+    <Compile Include="Models\GLModel.cs" />
+    <Compile Include="Models\GLMesh.cs" />
+    <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\ModelTechnique.cs" />
+    <Compile Include="Particles\Particle.cs" />
+    <Compile Include="Particles\ParticleEmitter.cs" />
+    <Compile Include="Particles\ParticleRenderTechnique.cs" />
+    <Compile Include="Particles\ParticleUpdateTechnique.cs" />
+    <Compile Include="Particles\ParticleVertex.cs" />
+    <Compile Include="Pipeline\DefaultStages\GLMeshStage.cs" />
+    <Compile Include="Pipeline\GLRenderPipeline.cs" />
+    <Compile Include="Pipeline\IDataPipeline.cs" />
+    <Compile Include="Pipeline\IRenderStage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RenderOptions.cs" />
+    <Compile Include="RenderState.cs" />
+    <Compile Include="Shaders\DefaultTechnique.cs" />
+    <Compile Include="Shaders\GLShader.cs" />
+    <Compile Include="Shaders\ShaderConstructor.cs" />
+    <Compile Include="Shaders\Technique.cs" />
+    <Compile Include="Shapes\AABB.cs" />
+    <Compile Include="Shapes\ShapeDrawer.cs" />
+    <Compile Include="Shapes\ViewFrustum.cs" />
+    <Compile Include="Textures\Texture.cs" />
+    <Compile Include="Textures\Texture1D.cs" />
+    <Compile Include="Textures\Texture2D.cs" />
+    <Compile Include="Textures\Texture3D.cs" />
+    <Compile Include="Textures\TextureConstructor.cs" />
+    <Compile Include="Textures\TextureCube.cs" />
+    <Compile Include="Utilities\GLConversion.cs" />
+    <Compile Include="Utilities\GLMethods.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ErrorFragmentShader.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ErrorVertexShader.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ParticleVertexShader.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ParticleFragmentShader.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ParticleUpdateShader.txt" />
+    <None Include="Resources\ParticleGeometryShader.txt" />
+    <None Include="Resources\DefaultVertexShader.txt" />
+    <None Include="Resources\DefaultFragmentShader.txt" />
+    <Content Include="ToDo.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

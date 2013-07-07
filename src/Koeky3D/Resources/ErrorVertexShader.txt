@@ -1,0 +1,10 @@
+﻿#version 140
+in vec3 in_Vertex;
+
+uniform mat4x4 projection, view, world;
+
+void main()
+{
+	// transform and project the vertex
+	gl_Position = projection * view * world * vec4(in_Vertex, 1.0f);
+}

@@ -1,0 +1,24 @@
+﻿- Improve efficiency of GLManager.InitialiseState so redundant state changes are avoided.
+
+- Improve efficiency of skeleton animations.
+	- Avoid constant creation of matrix and quaternion structs (done?)
+	- Can we skip uploading 2 array of matrices? inv joints and final transform in one? (not a bottleneck)
+	- Avoid iterating all key frames to determine where we are in the animation (this may be tricky)
+		- Partly done, but it might be done more efficient. Maybe I can use the RunningAnimation class to store results
+
+- Improve render efficiency by implementing a view frustum culling method
+	- Implement bounding boxes for the ParticleEmitter
+	- Create a (octree?) datastructure for efficient view frustum culling
+		- Maybe just ordinary spatial partitioning is enough...
+- Finish the particle package
+
+- Implement fall back methods for non opengl 3.x machines
+
+- Make up my mind about what direction this project should go
+	- Does the Pipeline package even belong here?
+	- Isn't the GLModel and GLMesh class too high level?
+	- Maybe I should just move these to a seperate project...
+
+- DO SOMETHING ABOUT THE WARNINGS!!!
+	- most warnings are documentation for the classes and methods. This is important to add tough...
+

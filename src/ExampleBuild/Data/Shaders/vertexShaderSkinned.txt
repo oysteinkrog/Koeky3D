@@ -1,0 +1,28 @@
+#version 140
+in vec3 in_Vertex;
+in vec2 in_TexCoord;
+in vec3 in_Normal;
+in vec4 in_BoneIndex;
+                    
+out vec2 out_TexCoord;
+out vec3 out_Normal;
+
+uniform mat4x4 projection, world, view;
+uniform mat4x4[64] joints;
+uniform mat4x4[64] invJoints;
+
+void main()
+{
+	out_TexCoord = in_TexCoord;
+	
+	// use vertex skinning
+	int boneIndex = int(in_BoneIndex.x);
+	vec4 newVertex = vec4(in_Vertex, 1.0f)* invJoints[boneIndex] * joints[boneIndex];
+	vec3 newNormal = in_Normal * mat3x3(joints[boneIndex]);
+		
+	// Same as in_Normal * gl_TextureMatrix
+	out_Normal = mat3x3(transpose(inverse(view * world))) * newNormal;
+		
+	// Transform the vertex
+	gl_Position = projection * view * world * newVertex;
+}

@@ -1,0 +1,14 @@
+#version 140
+in vec2 out_TexCoord;
+
+uniform sampler2D texture;
+uniform int useTexture;
+uniform vec4 drawColor;
+
+void main()
+{
+	if(useTexture == 1)
+		gl_FragColor = texture2D(texture, out_TexCoord);
+	else
+		gl_FragColor = drawColor;
+}

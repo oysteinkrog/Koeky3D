@@ -1,0 +1,20 @@
+#version 140
+in vec3 in_Vertex;
+in vec2 in_TexCoord;
+in vec3 in_Normal;
+                    
+out vec2 out_TexCoord;
+out vec3 out_Normal;
+
+uniform mat4x4 projection, world, view;
+
+void main()
+{
+	out_TexCoord = in_TexCoord;
+	
+	// Same as in_Normal * gl_TextureMatrix
+	out_Normal = mat3x3(transpose(inverse(view * world))) * in_Normal;
+	
+	// Transform the vertex
+	gl_Position = projection * view * world * vec4(in_Vertex, 1.0f);
+}

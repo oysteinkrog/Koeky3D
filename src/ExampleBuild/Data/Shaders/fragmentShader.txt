@@ -1,0 +1,24 @@
+#version 140
+in vec2 out_TexCoord;
+in vec3 out_Normal;
+                          
+uniform mat4x4 view;
+uniform sampler2D texture;
+uniform int lightOn;
+
+void main()
+{
+	// We use a constant light direction
+	vec3 lightDir = vec3(1.0f, 1.0f, 0.0f);
+	// transform the light direction to view space
+	lightDir = vec3(view * vec4(lightDir, 0.0f));
+	
+	// we clamp the light influence between 0.25 and 1.0. So there always is a bit of ambient light
+	float lightInfluence;
+	if(lightOn == 1)
+		lightInfluence = clamp(dot(lightDir, out_Normal), 0.25f, 1.0f);
+	else
+		lightInfluence = 1.0f;
+	
+	gl_FragColor = texture2D(texture, out_TexCoord) * lightInfluence;
+}

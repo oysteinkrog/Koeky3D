@@ -1,0 +1,14 @@
+#version 140
+in vec3 in_Vertex;
+in vec2 in_TexCoord;
+
+out vec2 out_TexCoord;
+
+uniform mat4x4 projection, view, world;
+
+void main()
+{
+	out_TexCoord = in_TexCoord;
+
+	gl_Position = projection * view * world * vec4(in_Vertex, 1.0f);
+}

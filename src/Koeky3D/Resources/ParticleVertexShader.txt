@@ -1,0 +1,23 @@
+#version 140
+in vec3 in_Vertex;
+in vec4 in_TextureAlpha;
+in float in_Scale;
+in float in_LifeTime;
+
+out vec3 in_Vertex0;
+out vec4 in_TextureAlpha0;
+out float in_Scale0;
+out float in_Alpha0;
+
+uniform float maxLifeTime;
+
+void main()
+{
+	in_Vertex0 = in_Vertex;
+	in_TextureAlpha0 = in_TextureAlpha;
+	in_Scale0 = in_Scale;
+	if(in_LifeTime > 0.0f)
+		in_Alpha0 = 1.0f - (in_LifeTime / maxLifeTime);
+	else
+		in_Alpha0 = 0.0f;
+}

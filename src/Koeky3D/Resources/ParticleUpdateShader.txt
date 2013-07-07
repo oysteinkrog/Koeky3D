@@ -1,0 +1,60 @@
+#version 140
+in vec3 in_Vertex;
+in vec3 in_Velocity;
+in vec4 in_TextureAlpha;
+in float in_Scale;
+in float in_LifeTime;
+
+out vec3 out_Vertex;
+out vec3 out_Velocity;
+out vec4 out_TextureAlpha;
+out float out_Scale;
+out float out_LifeTime;
+
+uniform vec3 emitterPosition;
+uniform vec3 gravity;
+uniform vec3 wind;
+uniform float deltaTime;
+uniform float time;
+uniform sampler1D randomTexture;
+uniform float maxLifeTime;
+uniform float startScale;
+uniform float deltaScale;
+uniform vec3 minVelocity;
+uniform vec3 maxVelocity;
+
+vec3 getRandomValue()
+{
+	return texture1D(randomTexture, time).xyz;
+}
+
+void main()
+{
+	out_LifeTime = in_LifeTime + deltaTime;
+	if(out_LifeTime < 0.0f)
+	{
+		out_Scale = in_Scale;
+		out_Vertex = emitterPosition;
+		out_Velocity = in_Velocity;
+		out_TextureAlpha = in_TextureAlpha;
+	}
+	else if(out_LifeTime >= maxLifeTime)
+	{
+		// Reset particle
+		out_Vertex = emitterPosition;
+		vec3 random = getRandomValue();
+		out_Velocity = vec3((random.x * (minVelocity.x + maxVelocity.x)) - minVelocity.x, 
+							(random.y * (minVelocity.y + maxVelocity.y)) - minVelocity.y,
+							(random.z * (minVelocity.z + maxVelocity.z)) - minVelocity.z);
+		out_LifeTime = 0.0f;
+		out_Scale = startScale;
+		out_TextureAlpha = in_TextureAlpha;
+	}
+	else
+	{
+		out_Vertex = in_Vertex + in_Velocity * deltaTime;
+		out_Velocity = in_Velocity + gravity * deltaTime + wind * deltaTime;
+		out_TextureAlpha = in_TextureAlpha;
+		out_Scale = in_Scale + deltaScale * deltaTime;
+	}
+}
