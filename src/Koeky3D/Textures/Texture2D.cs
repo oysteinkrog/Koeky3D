@@ -57,7 +57,13 @@ namespace Koeky3D.Textures
             this.height = bitmap.Height;
 
             PixelFormat uploadFormat;
-            if (bitmap.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+            if (bitmap.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppRgb)
+            {
+                this.pixelInternalFormat = PixelInternalFormat.Rgba8;
+                this.pixelType = PixelType.UnsignedByte;
+                uploadFormat = PixelFormat.Bgra;
+            }
+            else if (bitmap.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
             {
                 this.pixelInternalFormat = PixelInternalFormat.Rgba8;
                 this.pixelType = PixelType.UnsignedByte;
